@@ -297,3 +297,54 @@ import pandas as pd
 students = list_students()
 df = pd.DataFrame(students)
 
+import streamlit as st
+import pandas as pd
+from services.students import list_students, add_student
+
+
+def render():
+    st.set_page_config(page_title="LTL Pathfinder", layout="wide")
+
+    st.title("LTL Pathfinder")
+
+    # ---------- Add Student Button ----------
+    if "show_add" not in st.session_state:
+        st.session_state.show_add = False
+
+    c1, c2 = st.columns([6, 1])
+    with c2:
+        if st.button("Add Student", type="primary"):
+            st.session_state.show_add = True
+
+    # ---------- Add Student Form ----------
+    if st.session_state.show_add:
+        st.markdown("### Add Student")
+
+        f1, f2 = st.columns(2)
+        first = f1.text_input("First Name")
+        last = f2.text_input("Last Name")
+
+        f3, f4 = st.columns(2)
+        grade = f3.text_input("Grade")
+        school = f4.text_input("School")
+
+        student_class = st.text_input("Class")
+
+        csave, ccancel = st.columns(2)
+
+        with csave:
+            if st.button("Save"):
+                if not first.strip() or not last.strip():
+                    st.error("First and last name required")
+                else:
+                    add_student(first, last, grade, school, student_class)
+                    st.success("Student added")
+                    st.session_state.show_add = False
+                    st.rerun()
+
+        with ccancel:
+            if st.button("Cancel"):
+                st.session_state.show_add = False
+                st.rerun()
+
+        st.divider()
