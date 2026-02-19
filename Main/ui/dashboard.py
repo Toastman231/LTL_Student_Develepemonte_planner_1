@@ -348,3 +348,26 @@ def render():
                 st.rerun()
 
         st.divider()
+
+ st.subheader("Students")
+
+    students = list_students()
+
+    if not students:
+        st.info("No students yet")
+        return
+
+    df = pd.DataFrame(students)
+
+    cols = [
+        "first_name",
+        "last_name",
+        "grade",
+        "school",
+        "class",
+        "created_at",
+    ]
+
+    df = df[[c for c in cols if c in df.columns]]
+
+    st.dataframe(df, use_container_width=True, hide_index=True)
