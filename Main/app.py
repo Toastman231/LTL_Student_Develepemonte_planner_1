@@ -1,5 +1,9 @@
 import streamlit as st
-from ui.dashboard import render
+import runpy
+from pathlib import Path
 
 st.set_page_config(page_title="LTL Pathfinder (Basic)", layout="wide")
-render()
+
+# Run the dashboard file directly
+dashboard_path = Path(__file__).parent / "ui" / "dashboard.py"
+runpy.run_path(dashboard_path)
