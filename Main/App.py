@@ -7,7 +7,7 @@ ROOT = Path(__file__).parent
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 
-from dashboard.py import render
+from ui.dashboard import render
 
 st.set_page_config(page_title="LTL Pathfinder (Basic)", layout="wide")
 
