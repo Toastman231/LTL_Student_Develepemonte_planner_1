@@ -294,3 +294,16 @@ if school_filter != "All schools":
 # Students table
 # ----------------------------
 st.dataframe(filtered, use_container_width=True, hide_index=True)
+
+Add a function like this (if it’s not there already):
+
+from data.store import save_student
+
+def add_student(name, age, grade):
+    student = {
+        "name": name,
+        "age": age,
+        "grade": grade
+    }
+    save_student(student)
+    return student
