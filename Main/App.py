@@ -10,4 +10,4 @@ if str(ROOT) not in sys.path:
 
 st.set_page_config(page_title="LTL Pathfinder (Basic)", layout="wide")
 
-render()
+
