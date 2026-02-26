@@ -270,40 +270,4 @@ for i, label in enumerate(["Add Note", "Add Journey", "Survey", "Report"], start
         st.button(label)
         st.markdown("</div>", unsafe_allow_html=True)
 
-# ----------------------------
-# Apply filters (basic demo)
-# ----------------------------
-filtered = df.copy()
 
-if q.strip():
-    filtered = filtered[filtered["Name"].str.contains(q, case=False, na=False)]
-
-if class_filter != "All classes":
-    filtered = filtered[filtered["Class"] == class_filter]
-
-if subject_filter != "All subjects":
-    filtered = filtered[filtered["Subject"] == subject_filter]
-
-if grade_filter != "All grades":
-    filtered = filtered[filtered["Grade"] == grade_filter]
-
-if school_filter != "All schools":
-    filtered = filtered[filtered["School"] == school_filter]
-
-# ----------------------------
-# Students table
-# ----------------------------
-st.dataframe(filtered, use_container_width=True, hide_index=True)
-
-Add a function like this (if it’s not there already):
-
-from data.store import save_student
-
-def add_student(name, age, grade):
-    student = {
-        "name": name,
-        "age": age,
-        "grade": grade
-    }
-    save_student(student)
-    return student
